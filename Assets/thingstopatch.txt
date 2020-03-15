@@ -1,0 +1,19 @@
+Scoreboard implementieren:
+	-Resourcenschonend:
+		-nicht konstant updaten
+		-nicht jeden Frame neue Panels erstellen
+			-Dictionary mit Player - Panel
+
+Player brauchen einen Kill Counter und generell mal Informationen über den Spieler:
+	-Möglichkeit finden Player Prefs zu speichern
+	-selber Server mit Informationen hosten
+	-google Drive anbindung?
+	-Object -> Spieler ist einfach aber wie funktioniert Spieler->Object
+		-vieleicht Player.SetCustomProperties()
+
+Player Stats über mehrere Instanzen speichern:
+	-in den PlayerPrefs eine SSID einfügen die einen auf nen speziellen Server leitet
+
+
+CameraSize in der CameraFovHandling Methode nicht ruckartig ändern, sondern gesmoothed raus / rein-zoomen
+
