@@ -82,4 +82,3 @@ public enum playerTeam
 {
     red, blue
 }
-

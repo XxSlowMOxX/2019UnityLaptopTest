@@ -81,16 +81,16 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\Code\Editor\ReordableList\LICENSE.txt" />
     <None Include="Assets\Photon\PhotonUnityNetworking\Code\Editor\PhotonUnityNetworking.Editor.asmdef" />
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Unity/2019.2.14f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -282,13 +282,28 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Api.45">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/GitHub.Api.45.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Logging">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/GitHub.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.Unity.45">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/GitHub.Unity.45.dll</HintPath>
+    </Reference>
+    <Reference Include="GitHub.UnityShim">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/GitHub.UnityShim.dll</HintPath>
+    </Reference>
+    <Reference Include="sfw.net">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>D:/Unity/Projects/2019UnityLaptopTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>D:/Unity/2019.2.14f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>

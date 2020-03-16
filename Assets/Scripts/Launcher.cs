@@ -62,6 +62,7 @@ public class Launcher : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
         }
     }
+
     public void switchOnlineOfflineMode()
     {
         if (PhotonNetwork.OfflineMode)
