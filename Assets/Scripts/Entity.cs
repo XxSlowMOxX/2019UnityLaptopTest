@@ -7,6 +7,9 @@ using Photon.Pun;
 
 public class Entity : MonoBehaviour
 {
+    [Space]
+    public string name;
+
     [Header("Health")]
     public float health = 100.0f;
     public float maxHealth = 100.0f;
@@ -29,13 +32,13 @@ public class Entity : MonoBehaviour
     public void Fire(GameObject prefab, Player spawningPlayer, Vector3 position, Quaternion Rotation, Vector3 velocity)
     {
         //print("Fire called");
-        //print(prefab.name);        
-        this.GetComponent<PhotonView>().RPC("SpawnObject", RpcTarget.All, prefab.name, spawningPlayer, position, Rotation, velocity, 6.0f);
+        //print(prefab.name);   
+        
     }
-    public void TakeDamageCall(float damage)
+    public void TakeDamageCall(float damage, string inflicter)
     {
         print("Ich nehme Schaden");
-        this.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage);
+        this.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, damage, inflicter);
     }
     public void PickUpCall(string objectName)
     {
@@ -91,7 +94,7 @@ public class Entity : MonoBehaviour
     }
 
     [PunRPC]
-    void TakeDamage(float damage)
+    void TakeDamage(float damage, string inflicter)
     {
         if (myState == entityState.Dead)
         {
@@ -100,7 +103,7 @@ public class Entity : MonoBehaviour
         health -= damage;
         if(health<=0 && PhotonNetwork.IsMasterClient)
         {
-            this.GetComponent<PhotonView>().RPC("EntityDeath", RpcTarget.All, "Michael Jackson");
+            this.GetComponent<PhotonView>().RPC("EntityDeath", RpcTarget.All, inflicter);
         }
     }
     [PunRPC]

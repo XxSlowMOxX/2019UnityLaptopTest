@@ -226,7 +226,6 @@ public class CubeMovement : MonoBehaviour
             playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(true);
             playerHUD.GetComponent<HUDScript>().respawnPanel.GetComponent<RespawnUI>().Initialize(spawnPoints.ToArray(), this);
             print(spawnPoints);
-            thisEntity.DeathCall();
         }        
     }
 

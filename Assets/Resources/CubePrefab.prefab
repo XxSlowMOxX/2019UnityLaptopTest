@@ -730,6 +730,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da3fc1bedf6e2e4d849bf40022f16a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  name: 
   health: 100
   maxHealth: 100
   forwardVector: {x: 0, y: 0, z: 0}

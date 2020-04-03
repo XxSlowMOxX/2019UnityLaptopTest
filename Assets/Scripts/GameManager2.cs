@@ -18,6 +18,7 @@ public class GameManager2 : MonoBehaviourPunCallbacks
             foreach (Player loopPlayer in PhotonNetwork.PlayerList)
             {
                 GameObject loopObject = PhotonNetwork.Instantiate("CubePrefab", Vector3.zero, Quaternion.identity);
+                loopObject.GetComponent<Entity>().name = loopPlayer.NickName;
                 loopObject.name = loopPlayer.NickName + " Spartan";
                 loopObject.GetComponent<PhotonView>().TransferOwnership(loopPlayer);
                 loopObject.GetComponent<CubeMovement>().debugArrow.GetComponent<PhotonView>().TransferOwnership(loopPlayer);

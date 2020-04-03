@@ -12,6 +12,7 @@ public class WeaponBase : MonoBehaviour
     public fireMode firingMode;
     public float firingRate;
     public float spread;
+    public float firingOffset;
     [Header("Mag Options")]
     public int magSize;
     public int maxAmmo;
@@ -20,8 +21,9 @@ public class WeaponBase : MonoBehaviour
     public float reloadingTime;
     [Header("Bullet Options")]
     public GameObject bulletObject;
-
+    
     private float timeSinceShot;
+    private string wielder;
 
     public bool Fire(float deltaTime)
     {
@@ -30,9 +32,10 @@ public class WeaponBase : MonoBehaviour
         {
             if(currentMag > 0)
             {
+                print(this.transform.rotation);
                 timeSinceShot = 0;
                 currentMag--;
-                this.GetComponentInParent<Entity>().Fire(bulletObject, PhotonNetwork.LocalPlayer, this.transform.position + (this.transform.up) - new Vector3(0,1,0), this.transform.parent.rotation * Quaternion.Euler(0, Random.Range(-spread, spread), 0), Vector3.zero);
+                this.GetComponentInParent<Entity>().gameObject.GetComponent<PhotonView>().RPC("SpawnObject", RpcTarget.All, bulletObject.name, PhotonNetwork.LocalPlayer, this.transform.position + (GetComponentInParent<Entity>().forwardVector * firingOffset), GetComponentInParent<Entity>().entitySprite.transform.rotation, Vector3.zero, 15.0f) ;
                 return true;
             }
             else
