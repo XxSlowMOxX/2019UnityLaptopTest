@@ -24,7 +24,7 @@ namespace Photon.Pun.Demo.Cockpit
         float Duration = 1f;
         public void OnValueChanged()
         {
-            StartCoroutine(FadeOut(UpdateIndicator));
+            //StartCoroutine(FadeOut(UpdateIndicator));
         }
 
         IEnumerator FadeOut(Graphic image)

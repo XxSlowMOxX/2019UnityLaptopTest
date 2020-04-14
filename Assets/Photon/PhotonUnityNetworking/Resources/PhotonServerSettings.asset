@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AppSettings:
     AppIdRealtime: e2b99ea8-d365-46fc-954e-1f1196b3cf74
-    AppIdChat: 
+    AppIdChat: 5b0f0924-1365-46dd-9c35-47867b1ff592
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
@@ -43,5 +43,9 @@ MonoBehaviour:
   - DropWeapon
   - EntityDeath
   - SpartanDeath
+  - PrintMessage
+  - MapIndexChange
+  - PlayerImage
+  - TeamChange
   DisableAutoOpenWizard: 1
   ShowSettings: 1

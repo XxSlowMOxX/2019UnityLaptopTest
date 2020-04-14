@@ -287,6 +287,12 @@
     <Reference Include="sfw.net">
       <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/Plugins/GitHub/Editor/sfw.net.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/StandaloneFileBrowser/Plugins/Ookii.Dialogs.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Assets/StandaloneFileBrowser/Plugins/System.Windows.Forms.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Users/morit/source/repos/XxSlowMOxX/2019UnityLaptopTest/Library/PackageCache/com.unity.ext.nunit@1.0.0/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
