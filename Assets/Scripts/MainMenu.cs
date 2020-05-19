@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviourPunCallbacks, IChatClientListener
 {
     private List<RoomInfo> rooms;
     Dictionary<Player, GameObject> playerRepDict = new Dictionary<Player, GameObject>();
+    Dictionary<Player, int> teamDict = new Dictionary<Player, int>();
     private Texture myImage;
     private ChatClient chatClient;
     private playerTeam myTeam;
@@ -233,8 +234,16 @@ public class MainMenu : MonoBehaviourPunCallbacks, IChatClientListener
             DontDestroyOnLoad(playerTeamObject);            
             foreach(Player loopPlayer in PhotonNetwork.PlayerList)
             {
-                //playerTeamObject.GetComponent<PlayerTeamDict>().teamDictionary.Add(loopPlayer, )
-            }            
+                if(teamDict[loopPlayer] == 0)
+                {
+                    playerTeamObject.GetComponent<PlayerTeamDict>().teamDictionary.Add(loopPlayer, playerTeam.red);
+                }
+                else
+                {
+                    playerTeamObject.GetComponent<PlayerTeamDict>().teamDictionary.Add(loopPlayer, playerTeam.blue);
+                }
+            }
+            print(playerTeamObject.GetComponent<PlayerTeamDict>().teamDictionary.ToStringFull());    
             PhotonNetwork.LoadLevel(mapList[selectedMapIndex].filename);
         }
     }
@@ -250,6 +259,14 @@ public class MainMenu : MonoBehaviourPunCallbacks, IChatClientListener
         {
             if (loopPlayer.NickName == playerName)
             {
+                if (teamDict.ContainsKey(loopPlayer))
+                {
+                    teamDict[loopPlayer] = teamIndex;
+                }
+                else
+                {
+                    teamDict.Add(loopPlayer, teamIndex);
+                }                
                 if(teamIndex == 0)
                 {
                     playerRepDict[loopPlayer].GetComponentInChildren<Image>().color = Color.red;

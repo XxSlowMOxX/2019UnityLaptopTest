@@ -47,5 +47,8 @@ MonoBehaviour:
   - MapIndexChange
   - PlayerImage
   - TeamChange
+  - ChangeTeam
+  - ChangeName
+  - Heal
   DisableAutoOpenWizard: 1
   ShowSettings: 1

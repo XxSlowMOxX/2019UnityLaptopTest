@@ -32,7 +32,7 @@ public class HUDScript : MonoBehaviour
         }
         healthText.text = thisEntity.health.ToString();
         nameText.text = PhotonNetwork.LocalPlayer.NickName;
-        if (thisEntity.health < 100.0f && thisEntity.health >= 0)
+        if (thisEntity.health <= 100.0f && thisEntity.health >= 0)
         {            
             healthBar.value = thisEntity.health / 100;
         }        

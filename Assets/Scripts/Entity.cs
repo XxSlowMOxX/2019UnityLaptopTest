@@ -20,6 +20,7 @@ public class Entity : MonoBehaviour
     public movementType myMovement;
     public enum entityState { Alive, Dead};
     public entityState myState;
+    public playerTeam myTeam;
     public List<WeaponBase> weaponList = new List<WeaponBase>();
     public GameObject entitySprite;
     public int spawnIndex = 0;
@@ -58,6 +59,17 @@ public class Entity : MonoBehaviour
             }
         }
     }
+    public void HealCall(float amount, bool fullyHeal = false)
+    {
+        if(fullyHeal == true)
+        {
+            this.GetComponent<PhotonView>().RPC("Heal", RpcTarget.All, maxHealth - health);
+        }
+        else
+        {
+            this.GetComponent<PhotonView>().RPC("Heal", RpcTarget.All, amount );
+        }
+    }
     public void DeathCall()
     {
         this.GetComponent<PhotonView>().RPC("EntityDeath", RpcTarget.All, "myself");
@@ -69,10 +81,14 @@ public class Entity : MonoBehaviour
             print("Will Drop Weapon");
             this.GetComponent<PhotonView>().RPC("DropWeapon", RpcTarget.All, currentWeaponIndex);
         }
-    }
-
+    }    
     #endregion
     #region rpcs
+    [PunRPC]
+    void Heal(float amount)
+    {
+        health += amount;
+    }
     [PunRPC]
     void ChangeWeapon(int swapIndex, int hideIndex)
     {
@@ -83,7 +99,6 @@ public class Entity : MonoBehaviour
         weaponList[hideIndex].gameObject.SetActive(false);
         currentWeaponIndex = swapIndex;
     }
-
     [PunRPC]
     void DropWeapon(int dropIndex)
     {
@@ -92,7 +107,6 @@ public class Entity : MonoBehaviour
         dropWeapon.transform.SetParent(null, true);
         weaponList.Remove(weaponList[dropIndex]);
     }
-
     [PunRPC]
     void TakeDamage(float damage, string inflicter)
     {
@@ -102,13 +116,14 @@ public class Entity : MonoBehaviour
         }
         health -= damage;
         if(health<=0 && PhotonNetwork.IsMasterClient)
-        {
+        {            
             this.GetComponent<PhotonView>().RPC("EntityDeath", RpcTarget.All, inflicter);
         }
     }
     [PunRPC]
     void EntityDeath(string killedName)
     {
+        print("<EntityDebug>: " + name + " has been killed");
         if(myState == entityState.Dead)
         {
             return;

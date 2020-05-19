@@ -9,12 +9,14 @@ public class GameManager2 : MonoBehaviourPunCallbacks
     [SerializeField]
     public Dictionary<Player, PlayerStats> statsDict = new Dictionary<Player, PlayerStats>();
 
+    private PlayerTeamDict teamDict;
+
     void Awake()
-    {
-        
+    {        
         print("Woke AF");
         if (PhotonNetwork.IsMasterClient)
         {
+            teamDict = GameObject.Find("PlayerTeamDict").GetComponent<PlayerTeamDict>();
             foreach (Player loopPlayer in PhotonNetwork.PlayerList)
             {
                 GameObject loopObject = PhotonNetwork.Instantiate("CubePrefab", Vector3.zero, Quaternion.identity);
@@ -22,10 +24,22 @@ public class GameManager2 : MonoBehaviourPunCallbacks
                 loopObject.name = loopPlayer.NickName + " Spartan";
                 loopObject.GetComponent<PhotonView>().TransferOwnership(loopPlayer);
                 loopObject.GetComponent<CubeMovement>().debugArrow.GetComponent<PhotonView>().TransferOwnership(loopPlayer);
-                //loopObject.GetComponent<CameraHandler>().HandleCamera();
-                //playerObjects.Add(loopPlayer, loopObject);
+                loopObject.GetComponent<CubeMovement>().TeamChangeCall(teamDict.teamDictionary[loopPlayer].ToString());
+                loopObject.GetComponent<CubeMovement>().NameChangeCall(loopPlayer.NickName);
                 PlayerStats loopStats = new PlayerStats();
                 loopStats.playerObject = loopObject;
+                statsDict.Add(loopPlayer, loopStats);
+                
+                
+            }
+            this.GetComponent<PhotonView>().RequestOwnership();
+        }
+        else if (PhotonNetwork.InRoom)
+        {
+            this.GetComponent<PhotonView>().RequestOwnership();
+            foreach(Player loopPlayer in PhotonNetwork.PlayerList)
+            {
+                PlayerStats loopStats = new PlayerStats();
                 statsDict.Add(loopPlayer, loopStats);
             }
         }
@@ -48,13 +62,13 @@ public class GameManager2 : MonoBehaviourPunCallbacks
             }
         }
     }
-    public List<RespawnPoint> GetRespawnPoints(Player deadPlayer)
+    public List<RespawnPoint> GetRespawnPoints(playerTeam respawnTeam)
     {
         RespawnPoint[] allPoints = FindObjectsOfType<RespawnPoint>();
         List<RespawnPoint> validPoints = new List<RespawnPoint>();
         foreach(RespawnPoint point in allPoints)
         {
-            if(point.pointTeam == statsDict[deadPlayer].myTeam)
+            if(point.pointTeam == respawnTeam)
             {
                 validPoints.Add(point);
                 print(point.name);

@@ -35,7 +35,7 @@ public class WeaponBase : MonoBehaviour
                 print(this.transform.rotation);
                 timeSinceShot = 0;
                 currentMag--;
-                this.GetComponentInParent<Entity>().gameObject.GetComponent<PhotonView>().RPC("SpawnObject", RpcTarget.All, bulletObject.name, PhotonNetwork.LocalPlayer, this.transform.position + (GetComponentInParent<Entity>().forwardVector * firingOffset), GetComponentInParent<Entity>().entitySprite.transform.rotation, Vector3.zero, 15.0f) ;
+                this.GetComponentInParent<Entity>().gameObject.GetComponent<PhotonView>().RPC("SpawnObject", RpcTarget.All, bulletObject.name, PhotonNetwork.LocalPlayer, this.transform.position + (GetComponentInParent<Entity>().forwardVector * firingOffset) - new Vector3(0,1,0), GetComponentInParent<Entity>().entitySprite.transform.rotation, Vector3.zero, 15.0f) ;
                 return true;
             }
             else

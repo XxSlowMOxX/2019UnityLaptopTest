@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CubeMovement : MonoBehaviour
+public class CubeMovement : MonoBehaviourPun
 {
 
     public Color selectorColor;
@@ -28,7 +28,6 @@ public class CubeMovement : MonoBehaviour
     private List<RespawnPoint> spawnPoints;
     private PhotonView myView;
 
-    // Start is called before the first frame update
     void Awake()
     {
         //GameObject cameraObject = Instantiate(camObj, this.transform);
@@ -43,12 +42,14 @@ public class CubeMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (myView.IsMine && thisEntity.myState == Entity.entityState.Alive)
+        if (myView.IsMine)
         {
-            
+            if(thisEntity.myState != Entity.entityState.Alive)
+            {
+                return;
+            }
             #region menus
             if (Input.GetKeyUp(KeyCode.Escape))
             {
@@ -82,7 +83,6 @@ public class CubeMovement : MonoBehaviour
             {
                 if(thisEntity.weaponList.Count > 0)
                 {
-                    print("Peng");
                     thisEntity.weaponList[thisEntity.currentWeaponIndex].Fire(Time.deltaTime);
                 }
                 else
@@ -92,8 +92,8 @@ public class CubeMovement : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.E))
             {
-                RaycastHit hit;
-                if(Physics.Raycast(this.transform.position, debugArrow.transform.forward, out hit, grabReach))
+                RaycastHit hit;                
+                if(Physics.Raycast(transform.position, debugArrow.transform.forward, out hit, grabReach))
                 {
                     if(hit.transform.gameObject.GetComponent<WeaponBase>() != null)
                     {
@@ -213,27 +213,55 @@ public class CubeMovement : MonoBehaviour
             camObj.GetComponent<Camera>().orthographicSize = 5 * camFovMult;
         }
     }
-
-    [PunRPC]
+    #region RPCS and Callers
+    public void SpartanRespawn(RespawnPoint resPoint)
+    {
+        playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(false);
+        print("IWILLSURVIVE");
+        thisEntity.myState = Entity.entityState.Alive;
+        thisEntity.HealCall(0, true);
+        transform.position = resPoint.transform.position;
+        this.GetComponent<PhotonView>().RPC("ChangeTeam", RpcTarget.All, thisEntity.myTeam.ToString());
+    }
+    public void TeamChangeCall(string teamstring)
+    {
+        this.GetComponent<PhotonView>().RPC("ChangeTeam", RpcTarget.All, teamstring);
+    }
+    public void NameChangeCall(string newname)
+    {
+        this.GetComponent<PhotonView>().RPC("ChangeName", RpcTarget.All, newname);
+    }    
     public void SpartanDeath()
     {
-		
+        debugArrow.transform.Find("RotatingSprite").GetComponent<SpriteRenderer>().color = Color.black;
         if(PhotonNetwork.LocalPlayer == myView.Owner)
         {
             playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(true);
             print("I am Dead" + this.gameObject.name);
-            spawnPoints = myMatch.GetRespawnPoints(PhotonNetwork.LocalPlayer);
+            spawnPoints = myMatch.GetRespawnPoints(thisEntity.myTeam);
             playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(true);
             playerHUD.GetComponent<HUDScript>().respawnPanel.GetComponent<RespawnUI>().Initialize(spawnPoints.ToArray(), this);
             print(spawnPoints);
         }        
     }
-
-    public void SpartanRespawn()
+    [PunRPC]
+    public void ChangeTeam(string teamstring)
     {
-        playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(false);
-        print("IWILLSURVIVE");
-        thisEntity.myState = Entity.entityState.Alive;
-        
+        if(teamstring == "blue")
+        {
+            thisEntity.myTeam = playerTeam.blue;
+            debugArrow.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        }
+        else
+        {
+            thisEntity.myTeam = playerTeam.red;
+            debugArrow.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        }
     }
+    [PunRPC]
+    public void ChangeName(string newname)
+    {
+        this.gameObject.name = newname;
+    }
+    #endregion
 }
