@@ -10,6 +10,6 @@ public class RespawnCaller : MonoBehaviour
     
     public void RespawnCall()
     {
-        mySpartan.SpartanRespawn(myPoint);
+        mySpartan.SpartanRespawnCall(myPoint);
     }
 }

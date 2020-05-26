@@ -124,10 +124,10 @@ public class Entity : MonoBehaviour
     void EntityDeath(string killedName)
     {
         print("<EntityDebug>: " + name + " has been killed");
-        if(myState == entityState.Dead)
+        /*if(myState == entityState.Dead)
         {
             return;
-        }
+        }*/
         deathEvent.Invoke();
         myState = entityState.Dead;
     }

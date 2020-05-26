@@ -214,14 +214,28 @@ public class CubeMovement : MonoBehaviourPun
         }
     }
     #region RPCS and Callers
-    public void SpartanRespawn(RespawnPoint resPoint)
+    public void SpartanRespawnCall(RespawnPoint resPoint)
     {
         playerHUD.GetComponent<HUDScript>().respawnPanel.SetActive(false);
-        print("IWILLSURVIVE");
+        print("IWILLSURVIVE");        
+        this.GetComponent<PhotonView>().RPC("SpartanRespawn", RpcTarget.All,resPoint.transform.position , thisEntity.myTeam.ToString());
+    }
+    [PunRPC]
+    public void SpartanRespawn(Vector3 pos, string teamString)
+    {
+        //test
         thisEntity.myState = Entity.entityState.Alive;
-        thisEntity.HealCall(0, true);
-        transform.position = resPoint.transform.position;
-        this.GetComponent<PhotonView>().RPC("ChangeTeam", RpcTarget.All, thisEntity.myTeam.ToString());
+        transform.position = pos;
+        thisEntity.health = thisEntity.maxHealth;
+        if (teamString == "blue")
+        {
+            debugArrow.GetComponentInChildren<SpriteRenderer>().color = Color.blue;
+        }
+        else
+        {
+            debugArrow.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        }
+
     }
     public void TeamChangeCall(string teamstring)
     {

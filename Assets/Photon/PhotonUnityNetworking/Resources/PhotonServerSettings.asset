@@ -50,5 +50,6 @@ MonoBehaviour:
   - ChangeTeam
   - ChangeName
   - Heal
+  - SpartanRespawn
   DisableAutoOpenWizard: 1
   ShowSettings: 1
